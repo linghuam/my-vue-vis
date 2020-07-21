@@ -1,0 +1,109 @@
+{
+  "bubble_size_field": [],
+  "guide_line": [],
+  "show_sub_dimension": false,
+  "colors": [],
+  "compare_value": "",
+  "total": "",
+  "cache": 0,
+  "is_old_cache": 0,
+  "y_optional": [],
+  "scatter_setting": {},
+  "gauge_setting": {},
+  "mismatch": [],
+  "color_field": [],
+  "guide_line_x": [],
+  "bubble_size_groups": [],
+  "latest_date": "",
+  "bubble_sizes": [],
+  "summary": {
+    "supply_summary": [],
+    "value": "",
+    "title": ""
+  },
+  "tb_version": 0,
+  "y": [
+    {
+      "unit_adv": "",
+      "is_new": false,
+      "alias_name": "到达时间(计数)",
+      "data_type": "date",
+      "aggregator": "COUNT",
+      "percent": "",
+      "uniq_id": 1594286732624,
+      "YoY": "",
+      "is_build_aggregated": 0,
+      "formula": "fk60220cab",
+      "formatter": {
+        "num": {
+          "millesimal": true,
+          "digit": 0
+        },
+        "percent": {
+          "digit": 0
+        },
+        "check": "num"
+      },
+      "description": "",
+      "QoQ": "",
+      "aggregator_name": "计数",
+      "is_empty": false,
+      "data": [
+        "6",
+        "6",
+        "6",
+        "2"
+      ],
+      "name": "到达时间",
+      "nick_name": "到达时间",
+      "fid": "fk60220cab",
+      "compare_values": "",
+      "compare_names": "",
+      "tb_id": "",
+      "col_summary": null
+    }
+  ],
+  "x": [
+    {
+      "name": "到达城市",
+      "data_type": "string",
+      "nick_name": "到达城市",
+      "export_tag": 0,
+      "is_new": false,
+      "granularity_name": "",
+      "tb_id": "",
+      "uniq_id": 1594286719933,
+      "fid": "fk95e3ea3e",
+      "granularity": "day",
+      "is_build_aggregated": 0,
+      "formula": "fk95e3ea3e",
+      "data": [
+        "南昌市",
+        "新余市",
+        "萍乡市",
+        "鹰潭市"
+      ]
+    },
+    {
+      "name": "出发站点",
+      "data_type": "string",
+      "nick_name": "出发站点",
+      "export_tag": 0,
+      "is_new": false,
+      "granularity_name": "",
+      "tb_id": "",
+      "uniq_id": 1594292266414,
+      "fid": "fkc92303d3",
+      "granularity": "day",
+      "is_build_aggregated": 0,
+      "formula": "fkc92303d3",
+      "data": [
+        "萍乡北",
+        "南昌西",
+        "南昌西",
+        "南昌西"
+      ]
+    }
+  ],
+  "guide_line_right": []
+}
