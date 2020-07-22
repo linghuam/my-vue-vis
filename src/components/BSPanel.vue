@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import TWEEN from "@tweenjs/tween.js"
+
 export default {
   name: 'BSPanel',
   props: {
@@ -88,7 +90,7 @@ export default {
     }
   },
   mounted() {
-    const panelEle = this.$refs.screenContainer
+    const panelEle = this.screenContainer =  this.$refs.screenContainer
     const hRuleEle = this.$refs.hRule
     const vRuleEle = this.$refs.vRule
     panelEle.addEventListener('scroll', e => {
@@ -97,6 +99,22 @@ export default {
       hRuleEle.scrollLeft = sLeft;
       vRuleEle.scrollTop = sTop;
     }, false);
+  },
+  methods: {
+    scrollTo(x, y) {
+      const pos = {
+        x: this.screenContainer.scrollLeft,
+        y: this.screenContainer.scrollTop
+      }
+      // 加滚动动画
+      new TWEEN.Tween(pos)
+      .to({ x, y }, 1000)
+      .onUpdate(({ x, y }) => {
+        this.screenContainer.scrollLeft = x
+        this.screenContainer.scrollTop = y
+      })
+      .start()
+    }
   }
 }
 </script>

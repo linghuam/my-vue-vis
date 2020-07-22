@@ -58,7 +58,7 @@ export default {
 
 <style lang="scss">
 #app {
-  height: 600px;
+  height: 750px;
   .comp-line {
     position: relative;
     height: 500px;
