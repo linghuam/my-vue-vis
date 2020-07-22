@@ -2,22 +2,27 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+
     <!-- <time-line
       startTime="2000"
       endTime="2020"
       initTime="2008"
       accuracy="year"
     ></time-line> -->
-    <div class="comp-line">
+
+    <!-- <div class="comp-line">
       <code-mirror id="barChartCode" @change="barData=$event" class="comp-col comp-code"></code-mirror>
       <bar-chart :data="barData" class="comp-col comp-chart"></bar-chart>
-    </div>
+    </div> -->
+
     <!-- <div class="comp-line">
       <code-mirror id="barChartCode2" @change="barData2=$event" class="comp-col comp-code"></code-mirror>
       <bar-chart :data="barData2" class="comp-col comp-chart"></bar-chart>
     </div> -->
     <!-- <pie-chart></pie-chart>
     <line-chart></line-chart> -->
+
+    <b-s-panel style="border: 1px solid blue;"></b-s-panel>
   </div>
 </template>
 
@@ -28,6 +33,7 @@ import BarChart from '@/components/BarChart'
 import PieChart from '@/components/PieChart'
 import LineChart from '@/components/LineChart'
 import CodeMirror from '@/components/CodeMirror'
+import BSPanel from '@/components/BSPanel'
 
 export default {
   name: "App",
@@ -43,13 +49,15 @@ export default {
     BarChart,
     PieChart,
     LineChart,
-    CodeMirror
+    CodeMirror,
+    BSPanel
   }
 };
 </script>
 
 <style lang="scss">
 #app {
+  height: 600px;
   .comp-line {
     position: relative;
     height: 500px;
