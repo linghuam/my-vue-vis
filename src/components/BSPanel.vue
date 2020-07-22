@@ -1,21 +1,31 @@
 <template>
   <div class="bs-panel" :style="{ backgroundColor: backgroundColor }">
-    <div v-if="hasHRule" :style="{ width: width + 'px' }" class="bs-panel__hrule">
-      <span v-for="mark in hRuleMarks" :key="mark" :style="{ left:`${ mark + 2 }px` }" class="rule-mark hrule-mark">{{ mark }}</span>
+    <div class="rule-div h-rule-div">
+      <div ref="hRule" class="bs-panel__rule-container h-rule-container">
+        <div v-if="hasHRule" :style="{ width: width + 'px' }" class="bs-panel__hrule">
+          <span v-for="mark in hRuleMarks" :key="mark" :style="{ left:`${ mark + 2 }px` }" class="rule-mark   hrule-mark">{{ mark }}</span>
+        </div>
+      </div>
     </div>
-    <div v-if="hasVRule" :style="{ height: height + 'px' }" class="bs-panel__vrule">
-      <span v-for="mark in vRuleMarks" :key="mark"  :style="{ top:`${ mark + 2 }px` }" class="rule-mark vrule-mark">{{ mark }}</span>
+    <div class="rule-div v-rule-div">
+      <div ref="vRule" class="bs-panel__rule-container v-rule-container">
+        <div v-if="hasVRule" :style="{ height: height + 'px' }" class="bs-panel__vrule">
+          <span v-for="mark in vRuleMarks" :key="mark"  :style="{ top:`${ mark + 2 }px` }" class="rule-mark   vrule-mark">{{ mark }}</span>
+        </div>
+      </div>
     </div>
-    <div v-if="hasGrid" :style="{ width: width + 'px', height: height + 'px' }" class="bs-panel__grid"></div>
-    <div class="bs-panel__datascreen" :style="{
-      width: width + 'px',
-      height: height + 'px',
-      backgroundColor: backgroundColor,
-      backgroundImage: `url(${backgroundImage})`,
-      borderColor: borderColor,
-      borderStyle: borderStyle,
-      borderWidth: borderWidth
-    }"></div>
+    <div ref="screenContainer" class="bs-panel__datascreen-container">
+      <div class="bs-panel__datascreen" :style="{
+        width: width + 'px',
+        height: height + 'px',
+        backgroundColor: backgroundColor,
+        backgroundImage: `url(${backgroundImage})`,
+        borderColor: borderColor,
+        borderStyle: borderStyle,
+        borderWidth: borderWidth
+      }"></div>
+      <div v-if="hasGrid" :style="{ width: width + 'px', height: height + 'px' }" class="bs-panel__grid"></div>
+    </div>
   </div>
 </template>
 
@@ -76,6 +86,17 @@ export default {
       }
       return markArr
     }
+  },
+  mounted() {
+    const panelEle = this.$refs.screenContainer
+    const hRuleEle = this.$refs.hRule
+    const vRuleEle = this.$refs.vRule
+    panelEle.addEventListener('scroll', e => {
+      const sTop = panelEle.scrollTop
+      const sLeft = panelEle.scrollLeft
+      hRuleEle.scrollLeft = sLeft;
+      vRuleEle.scrollTop = sTop;
+    }, false);
   }
 }
 </script>
@@ -85,50 +106,80 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  .bs-panel__hrule {
-    position: sticky;
-    height: 20px;
-    left: 30px;
-    top: 0;
-    z-index: 2;
-    background-color: #8e8c8c;
-    background-image: url('../assets/ruler_h.png');
-    background-repeat: repeat-x;
-  }
-  .bs-panel__vrule {
-    position: sticky;
-    width: 20px;
-    top: 30px;
-    left: 0;
-    z-index: 2;
-    background-color: #8e8c8c;
-    background-image: url('../assets/ruler_v.png');
-    background-repeat: repeat-y;
-  }
-  .rule-mark {
+  overflow: hidden;
+  .rule-div {
     position: absolute;
-    font-size: 10px;
-    line-height: 14px;
-    color: rgba(2, 1, 1, 0.5);
-    &.vrule-mark {
-      transform: translateY(-14px) rotate(90deg);
-      transform-origin: left bottom;
+    overflow: hidden;
+    background-color: #8e8c8c;
+    &.h-rule-div {
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 20px;
+    }
+    &.v-rule-div {
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+    }
+    .bs-panel__rule-container {
+      position: absolute;
+      overflow: hidden;
+      // background-color: #8e8c8c;
+      &.h-rule-container {
+        top: 0;
+        left: 30px;
+        right: 0;
+        height: 100%;
+        .bs-panel__hrule {
+          position: absolute;
+          height: 100%;
+          background-image: url('../assets/ruler_h.png');
+          background-repeat: repeat-x;
+        }
+      }
+      &.v-rule-container {
+        left: 0;
+        top: 30px;
+        bottom: 0;
+        width: 100%;
+        .bs-panel__vrule {
+          position: absolute;
+          width: 100%;
+          background-image: url('../assets/ruler_v.png');
+          background-repeat: repeat-y;
+        }
+      }
+      .rule-mark {
+        position: absolute;
+        font-size: 10px;
+        line-height: 14px;
+        color: rgba(2, 1, 1, 0.5);
+        &.vrule-mark {
+          transform: translateY(-14px) rotate(90deg);
+          transform-origin: left bottom;
+        }
+      }
     }
   }
-  .bs-panel__grid {
+  .bs-panel__datascreen-container {
     position: absolute;
     left: 30px;
     top: 30px;
-    z-index: 1;
-    background-image: url('../assets/data-screen-grid.png');
-    background-repeat: repeat;
-  }
-  .bs-panel__datascreen {
-    position: absolute;
-    left: 30px;
-    top: 30px;
+    right: 30px;
+    bottom: 30px;
+    overflow: auto;
     box-shadow: 1px 2px 10px #000000;
+    .bs-panel__datascreen {
+      position: absolute;
+      background-size: cover;
+    }
+    .bs-panel__grid {
+      position: absolute;
+      background-image: url('../assets/data-screen-grid.png');
+      background-repeat: repeat;
+    }
   }
 }
 </style>

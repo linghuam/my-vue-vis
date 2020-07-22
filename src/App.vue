@@ -22,7 +22,7 @@
     <!-- <pie-chart></pie-chart>
     <line-chart></line-chart> -->
 
-    <b-s-panel style="border: 1px solid blue;"></b-s-panel>
+    <b-s-panel style="border: 1px solid blue;" :backgroundImage="screenBg" :hasGrid="false"></b-s-panel>
   </div>
 </template>
 
@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       barData: null,
-      barData2: null
+      barData2: null,
+      screenBg: require('./assets/screen-bg.png')
     }
   },
   components: {
