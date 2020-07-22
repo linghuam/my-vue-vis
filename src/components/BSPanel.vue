@@ -185,8 +185,8 @@ export default {
     position: absolute;
     left: 30px;
     top: 30px;
-    right: 30px;
-    bottom: 30px;
+    right: 10px;
+    bottom: 10px;
     overflow: auto;
     box-shadow: 1px 2px 10px #000000;
     .bs-panel__datascreen {
