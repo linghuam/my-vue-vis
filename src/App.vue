@@ -41,7 +41,7 @@ export default {
     return {
       barData: null,
       barData2: null,
-      screenBg: require('./assets/screen-bg.png')
+      screenBg: require('./compressed_images/screen-bg.webp')
     }
   },
   components: {
